@@ -19,12 +19,12 @@ public class DefaultListener implements Listener {
 			if (ScatterLocation.getLocation(p) != null) {
 				ScatterLocation sl = ScatterLocation.getLocation(p);
 
-				if (sl.getTimeSinceSpread() < 30000) {
+				if (sl.getTimeSinceSpread() < InstaScatter.ins.getConfig().getInt("scatter_damage_time") * 1000) {
 					event.setCancelled(true);
 					if (event.getCause() == DamageCause.SUFFOCATION) {
 						p.teleport(p.getLocation().add(0, 3, 0));
 					} else if (event.getCause() != DamageCause.CONTACT) {
-						p.sendMessage(InstaScatter.prefix + "Cancelling scatter damage...");
+						p.sendMessage(InstaScatter.prefix + ConfigFile.Messages.get().getString("scatter_damage"));
 					}
 				}
 			}

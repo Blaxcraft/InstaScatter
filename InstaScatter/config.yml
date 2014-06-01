@@ -1,2 +1,7 @@
 prefix: "&7[&cInstaScatter&7]"
 text_color_id: "f"
+
+unstick_players: true
+scatter_damage_time: 15
+
+scatter_broadcast_interval: 3

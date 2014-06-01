@@ -1,0 +1,5 @@
+initial_scatter_message: "Scattering %players% in a radius of %radius% in world %world%"
+
+finished_scattering: "Scattered %players% in %time%!"
+
+scatter_damage: "Cancelling scatter damage..."

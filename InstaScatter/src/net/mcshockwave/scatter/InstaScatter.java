@@ -19,6 +19,10 @@ public class InstaScatter extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new DefaultListener(), this);
 
 		saveDefaultConfig();
+		
+		for (ConfigFile file : ConfigFile.values()) {
+			file.saveDefaults();
+		}
 
 		textcolor = ChatColor.getByChar(getConfig().getString("text_color_id"));
 		prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix")) + " " + textcolor;
@@ -45,12 +49,6 @@ public class InstaScatter extends JavaPlugin {
 				}
 
 				if (w != null) {
-					int count = ScatterManager.getScatterPlayers().size();
-
-					Bukkit.broadcastMessage(prefix + "Scattering §c" + count + textcolor + " player"
-							+ (count == 1 ? "" : "s") + " in a radius of §a" + radius + textcolor + " in world §e"
-							+ w.getName());
-
 					ScatterManager.spreadPlayers(w, radius);
 				} else {
 					return false;
@@ -72,6 +70,14 @@ public class InstaScatter extends JavaPlugin {
 		} catch (Exception e) {
 		}
 		return false;
+	}
+	
+	public static String getFormattedString(String input, String... vals) {
+		for (int i = 0; i < vals.length; i += 2) {
+			input = input.replace("%" + vals[i] + "%", vals[i + 1]);
+		}
+		
+		return input;
 	}
 
 }
