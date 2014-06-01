@@ -1,0 +1,8 @@
+name: InstantScatter
+version: 1.0
+author: Blaxcraft
+main: net.mcshockwave.scatter.InstaScatter
+commands:
+   spread:
+      description: Scatter players throughout the map
+      usage: /spread <radius> (world)
