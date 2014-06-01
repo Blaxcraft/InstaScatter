@@ -6,3 +6,6 @@ commands:
    spread:
       description: Scatter players throughout the map
       usage: /spread <radius> (world)
+   spreadplayer:
+      description: Scatter a single player on the map
+      usage: /spread <player> <radius> (world)

@@ -19,7 +19,7 @@ public class InstaScatter extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new DefaultListener(), this);
 
 		saveDefaultConfig();
-		
+
 		for (ConfigFile file : ConfigFile.values()) {
 			file.saveDefaults();
 		}
@@ -37,24 +37,56 @@ public class InstaScatter extends JavaPlugin {
 				return false;
 			}
 
-			String rad = args[0];
+			if (label.equalsIgnoreCase("spread")) {
+				String rad = args[0];
 
-			if (isInteger(rad)) {
-				int radius = Integer.parseInt(rad);
-				World w = null;
-				if (args.length > 1) {
-					w = Bukkit.getWorld(args[1]);
-				} else if (sender instanceof Player) {
-					w = ((Player) sender).getWorld();
-				}
+				if (isInteger(rad)) {
+					int radius = Integer.parseInt(rad);
+					World w = null;
+					if (args.length > 1) {
+						w = Bukkit.getWorld(args[1]);
+					} else if (sender instanceof Player) {
+						w = ((Player) sender).getWorld();
+					}
 
-				if (w != null) {
-					ScatterManager.spreadPlayers(w, radius);
+					if (w != null) {
+						ScatterManager.spreadPlayers(w, radius);
+					} else {
+						return false;
+					}
 				} else {
 					return false;
 				}
-			} else {
-				return false;
+			} else if (label.equalsIgnoreCase("spreadplayer")) {
+				if (args.length == 1) {
+					return false;
+				}
+
+				String player = args[0];
+				if (Bukkit.getPlayer(player) == null) {
+					return false;
+				}
+				Player pl = Bukkit.getPlayer(player);
+
+				String rad = args[1];
+
+				if (isInteger(rad)) {
+					int radius = Integer.parseInt(rad);
+					World w = null;
+					if (args.length > 2) {
+						w = Bukkit.getWorld(args[2]);
+					} else {
+						w = pl.getWorld();
+					}
+
+					if (w != null) {
+						ScatterManager.teleportPlayer(pl, radius, w);
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
 			}
 		} else {
 			sender.sendMessage("§cYou are not op!");
@@ -71,12 +103,12 @@ public class InstaScatter extends JavaPlugin {
 		}
 		return false;
 	}
-	
+
 	public static String getFormattedString(String input, String... vals) {
 		for (int i = 0; i < vals.length; i += 2) {
 			input = input.replace("%" + vals[i] + "%", vals[i + 1]);
 		}
-		
+
 		return ChatColor.translateAlternateColorCodes('&', input);
 	}
 
