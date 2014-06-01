@@ -8,7 +8,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -136,16 +135,16 @@ public class ScatterManager {
 
 	public static Location teleportPlayer(Player p, int spreadDistance, World world, boolean single) {
 		boolean goodSpawn = false;
-		if (!single) {
-			for (Player p2 : spread) {
-				Team t = score.getPlayerTeam(p);
-				Team t2 = score.getPlayerTeam(p2);
-				if (p2 != p && t != null && t2 != null && t == t2) {
-					p.teleport(p2);
-					goodSpawn = true;
-				}
-			}
-		}
+		// if (!single) {
+		// for (Player p2 : spread) {
+		// Team t = score.getPlayerTeam(p);
+		// Team t2 = score.getPlayerTeam(p2);
+		// if (p2 != p && t != null && t2 != null && t == t2) {
+		// p.teleport(p2);
+		// goodSpawn = true;
+		// }
+		// }
+		// }
 		int tries = 0;
 		while (!goodSpawn) {
 			tries++;
