@@ -77,7 +77,7 @@ public class InstaScatter extends JavaPlugin {
 			input = input.replace("%" + vals[i] + "%", vals[i + 1]);
 		}
 		
-		return input;
+		return ChatColor.translateAlternateColorCodes('&', input);
 	}
 
 }
