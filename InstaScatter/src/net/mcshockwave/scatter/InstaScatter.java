@@ -80,7 +80,7 @@ public class InstaScatter extends JavaPlugin {
 					}
 
 					if (w != null) {
-						ScatterManager.teleportPlayer(pl, radius, w);
+						ScatterManager.teleportPlayer(pl, radius, w, true);
 					} else {
 						return false;
 					}

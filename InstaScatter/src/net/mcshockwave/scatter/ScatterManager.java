@@ -119,7 +119,7 @@ public class ScatterManager {
 		int scattered = 0;
 		ArrayList<Player> spread = new ArrayList<Player>();
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			teleportPlayer(p, spreadDistance, world);
+			teleportPlayer(p, spreadDistance, world, false);
 			scattered++;
 
 			if (scattered % InstaScatter.ins.getConfig().getInt("scatter_broadcast_interval") == 0) {
@@ -134,14 +134,16 @@ public class ScatterManager {
 		spread.clear();
 	}
 
-	public static Location teleportPlayer(Player p, int spreadDistance, World world) {
+	public static Location teleportPlayer(Player p, int spreadDistance, World world, boolean single) {
 		boolean goodSpawn = false;
-		for (Player p2 : spread) {
-			Team t = score.getPlayerTeam(p);
-			Team t2 = score.getPlayerTeam(p2);
-			if (t != null && t2 != null && t == t2) {
-				p.teleport(p2);
-				goodSpawn = true;
+		if (!single) {
+			for (Player p2 : spread) {
+				Team t = score.getPlayerTeam(p);
+				Team t2 = score.getPlayerTeam(p2);
+				if (t != null && t2 != null && t == t2) {
+					p.teleport(p2);
+					goodSpawn = true;
+				}
 			}
 		}
 		int tries = 0;
