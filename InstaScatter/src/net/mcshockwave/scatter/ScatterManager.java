@@ -140,7 +140,7 @@ public class ScatterManager {
 			for (Player p2 : spread) {
 				Team t = score.getPlayerTeam(p);
 				Team t2 = score.getPlayerTeam(p2);
-				if (t != null && t2 != null && t == t2) {
+				if (p2 != p && t != null && t2 != null && t == t2) {
 					p.teleport(p2);
 					goodSpawn = true;
 				}
